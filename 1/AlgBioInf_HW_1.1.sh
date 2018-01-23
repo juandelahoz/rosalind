@@ -1,0 +1,1 @@
+awk '{if(NR==1){a=$1}else{print(substr(a,$1+1,$2-$1+1),substr(a,$3+1,$4-$3+1))}}' $1

@@ -1,0 +1,1 @@
+awk 'BEGIN{FS=""}{for(i=1;i<=NF;i=i+1){if($i=="A")a=a+1;else if($i=="C")c=c+1;else if($i=="G")g=g+1;else if($i=="T")t=t+1}}END{print a,c,g,t}' $1
