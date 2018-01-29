@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-generation = 35
-offspring = 3
+generation = 36
+offspring = 5
 
 def fibonacci( offspring, generation):
 	Fn2 = Fn1 = 1

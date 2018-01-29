@@ -29,4 +29,4 @@ for i in range(len(row)):
 
 print(consensus)
 for i in profk:
-	print(i, profile[i])
+	print(i, " ".join(map(str, profile[i])))

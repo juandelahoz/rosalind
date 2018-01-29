@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-generation = 78
+generation = 91
 life_span = 17
 
 G = [0 for age in range(life_span)]

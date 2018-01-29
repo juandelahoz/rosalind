@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-k,n,m = 15.0,15.0,16.0
+k,n,m = 30.0, 17.0, 18.0
 tot = k + n + m
 
 if(k>0):
