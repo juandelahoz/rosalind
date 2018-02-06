@@ -30,9 +30,6 @@ for ik in range(k):
 		m += 1
 		if m == end:
 			break
-	print(edges)
-	print(inc)
-	print(out)
 
 	# test if hamiltonian path exists
 	zeros = [0,0]
@@ -46,67 +43,43 @@ for ik in range(k):
 	if zeros[0] == 1 and zeros[1] == 1:
 		hp = 1
 	else:
-		print("---> ",hp)
+		print(hp)
 		continue
 
 	# build hamiltonian path
-	print(first,final)
 	path = [str(first)]
-	sorted_edges = []
 	prev = first
-	print("path= "," ".join(path))
 	for i in range(len(inc)):
-		print("i = ", i)
 		# get all outgoing nodes from previous
 		outgoing = out[prev-1]
 		# if there is only one outgoing node, go to that one
 		if len(outgoing) == 1:
-			print("outgo 1", outgoing)
-			next_n = outgoing
-			prev   = int(next_n[0])
-			path.append(str(next_n[0]))
-			print("path= "," ".join(path))
+			prev = int(outgoing[0])
+			path.append(str(outgoing[0]))
 			continue
 		# if there are more outgoing nodes...
 		else:
-			print("outgo 2", outgoing)
-			# look at all of them
+			# look at each of them
 			for destination in outgoing:
-				# if one of them has only one origin node, go there
 				origin = inc[destination-1]
+				# if one of them has only one origin node, go there
 				if len(origin) == 1:
-					print("origin 1",origin," - ", destination)
-					next_n = destination
-					prev   = next_n
-					path.append(str(next_n))
-					print("path= "," ".join(path))
+					prev = destination
+					path.append(str(destination))
 					break
+				# if one of them has multiple origins
 				else:
-					print("origin 2",origin," - ", destination)
+					# check that all those origins are already on path
 					all_on_path = True
 					for orig in origin:
-						print("c",orig,destination)
+						# if one of its origins is not yet on path, stop
 						if str(orig) not in path:
 							all_on_path = False
-							print("not in path",orig)
 							break
+					# if all origins are already on path, add it to path
 					if all_on_path:
-						next_n = destination
-						prev   = next_n
-						path.append(str(next_n))
-						print("path= "," ".join(path))
-
-		print("i = ", i)
-	print(path)
-
-
-
+						prev = destination
+						path.append(str(destination))
 
 	# print result:
-	print("--> ",hp, " ".join(path))
-
-
-
-
-
-
+	print(hp, " ".join(path))
