@@ -6,7 +6,6 @@ inp = open(sys.argv[1],"r")
 
 # variables for graph
 edges = []
-in_out = []
 n_nodes = 0
 # read file
 for line in inp:
@@ -53,53 +52,33 @@ def find_next(eds,curr):
 path = []
 stack = []
 current = start
+exit = True # starting edge has an exit!
 
-while len(edges) >1:
-	print(edges,stack)
-	print(path)
+while len(edges) >0:
+	# find an edge with an exit
+	while not exit:
+		path.append(current)
+		current = stack[-1]
+		stack.pop(-1)
+		exit = other_path(edges,current)
+	# go through graph until getting stuck
 	stuck = False
 	while not stuck:
-		print("a",current)
-		print(edges,stack)
-
+		# what is the next node?
 		edges, next_node = find_next(edges,current)
-		
-		print(edges, current, next_node)
 		if next_node == -1:
 			stuck = True
 			exit = False
 		else:
 			stack.append(int(current))
 			current = int(next_node)
-		print("b",current,stuck, stack)
-		print("-----------------------")
-	# go back to some edge with other exit
-	print(path)
 
-	if len(edges) > 0:
-		while not exit:
-			print("c",current)
-			print(edges,stack)
-			path.append(current)
-			current = stack[-1]
-			stack.pop(-1)
-			exit = other_path(edges,current)
-			print(path)
-			print("d",current, exit)
-			print(".-.-.-.-.-.-.-.-.-.-.-.-")
-	else:
-		while len(stack) > 0:
-			print("e",current)
-			print(edges,stack)
-			path.append(current)
-			current = stack[-1]
-			stack.pop(-1)
-			print(path)
-			print("f",current)
-			print("...-...-...-...-...-...-...")
-
-path.append(current)
+# finally, get the remaining stack
+stack.append(current)
+for i in range(len(stack)-1,-1,-1):
+	path.append(stack[i])
+# and reverse path
 path.reverse()
+
 # print result:
-print(" ".join(map(str,path)))
-print(edges)
+print("->".join(map(str,path)))
