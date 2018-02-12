@@ -5,21 +5,21 @@ import sys
 
 inp = open(sys.argv[1],"r")
 
-taxa = []
-tids = []
+seqfa = []
+seqid = []
 seq = ""
 fline = False
 for line in inp:
 	if line.startswith(">"):
-		tids.append(line.strip()[1:])
+		seqid.append(line.strip()[1:])
 		if fline:
-			taxa.append(seq)
+			seqfa.append(seq)
 			seq = ""
 		fline = True
 	else:
 		seq += line.strip()
-taxa.append(seq)
-n = len(taxa)
+seqfa.append(seq)
+n = len(seqfa)
 
 # create distance matrix
 D = [0] * n
@@ -27,8 +27,8 @@ D = [0] * n
 for i in range(n):
 	s2 = []
 	for j in range(n):
-		l = len(taxa[i])
-		s2.append( sum([1.0 if taxa[i][k] != taxa[j][k] else 0.0 for k in range(l)]) /l )
+		l = len(seqfa[i])
+		s2.append( sum([1.0 if seqfa[i][k] != seqfa[j][k] else 0.0 for k in range(l)]) /l )
 		D[i] = s2
 
 # print matrix
